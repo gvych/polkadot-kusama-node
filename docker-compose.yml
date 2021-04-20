@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  polkadot:
+    #image:  parity/polkadot:master-0.8.28-3079e7f0-b14a1851
+    image:  parity/polkadot
+    #command: --pruning=archive --chain kusama --wasm-execution Compiled
+    command:  --chain kusama --validator --name "kusama-petersburg-val-1" --pool-kbytes 6291456 --pool-limit 16384 --prometheus-port 8090 --max-parallel-downloads 25 --max-runtime-instances 64 --out-peers 25 --state-cache-size 671088640
+    restart: always
+    ports:
+    - 30333:30333
+    - 127.0.0.1:9933:9933
+    volumes:
+    - /data:/polkadot/.local/share/polkadot/
+
+
+      #docker run -d --name=netdata      -v netdataconfig:/etc/netdata   -v netdatalib:/var/lib/netdata   -v netdatacache:/var/cache/netdata   -v /etc/passwd:/host/etc/passwd:ro   -v /etc/group:/host/etc/group:ro   -v /proc:/host/proc:ro   -v /sys:/host/sys:ro   -v /etc/os-release:/host/etc/os-release:ro   --restart unless-stopped   --cap-add SYS_PTRACE   --security-opt apparmor=unconfined   netdata/netdata
+      #docker exec -it netdata netdata-claim.sh -token=asdfdsff -rooms=asdfdf -url=https://app.netdata.cloud -id=$(uuidgen)
