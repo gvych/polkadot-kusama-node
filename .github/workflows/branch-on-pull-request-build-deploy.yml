@@ -1,0 +1,22 @@
+name: Branch build/deploy
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+
+jobs:
+  branch-build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Extract env slug
+      id: get-slug
+      shell: bash
+      run: 
+      - echo "##[set-output name=slug;]$(echo ${GITHUB_REF#refs/pull/} | tr '[:upper:]_/' '[:lower:]--' | cut -b -20 )"
+      - echo "##[set-output name=slug_head;]$(echo ${{github.event.pull_request.head.ref}}| sed 's_#refs/pull/__' | tr '[:upper:]_/' '[:lower:]--' | cut -b -20 )"
+  
+   - run:
+     - echo ${{ steps.get-slug.outputs.slug }}
+     - echo ${{ steps.get-slug.outputs.slug_head }}
+
+      
