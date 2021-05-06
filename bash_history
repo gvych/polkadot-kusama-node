@@ -17,3 +17,4 @@
    18  apt-get install docker-ce docker-ce-cli containerd.io
    19  sudo chmod +x /usr/local/bin/docker-compose
    curl -v -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "hasSessionKeys", "params":[]}'  http://127.0.0.1:9933/
+
